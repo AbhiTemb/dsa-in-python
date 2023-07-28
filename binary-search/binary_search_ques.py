@@ -55,5 +55,57 @@ These steps are finding last occurence
 4. If query < mid: e = mid-1 and goto step 2
 5. If query > mid: s = mid+1 and goto step 2
 '''
- 
 
+
+def first_occurence(numbers, query):
+    s = 0
+    e = len(numbers) - 1
+
+    while s <= e:
+        mid = (s + e) // 2
+        if numbers[mid] == query :
+            if mid == 0:
+                return mid
+            elif numbers[mid - 1] == numbers[mid]:
+                e = mid - 1
+            else:
+                return mid
+        elif numbers[mid] < query:
+            s = mid + 1
+        else: 
+            e = mid - 1
+
+
+def last_occurence(numbers, query):
+    s = 0
+    e = len(numbers) - 1
+
+    while s <= e:
+        mid = (s + e) // 2
+        if numbers[mid] == query :
+            if mid == len(numbers) - 1:
+                return mid
+            elif numbers[mid + 1] == numbers[mid]:
+                s = mid + 1
+            else:
+                return mid
+        elif numbers[mid] < query:
+            s = mid + 1
+        else: 
+            e = mid - 1
+
+def main():
+    print("Please input size of array")        
+    size = int(input())
+
+    numbers = []
+    for i in range(size):
+        numbers.append(int(input("Input number: ")))
+
+    print("Please enter the query:")
+    query = int(input())
+    
+    answer = [first_occurence(numbers, query), last_occurence(numbers, query)]
+    print("Answer", answer)
+
+main()
